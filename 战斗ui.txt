@@ -468,7 +468,7 @@ body {
 }
 .kf-type.Thường { background:hsla(42,58%,55%,0.12); color:var(--gold); border:1px solid hsla(42,58%,55%,0.25); }
 .kf-type.Tuyệt_học { background:hsla(355,62%,44%,0.12); color:hsl(355,65%,60%); border:1px solid hsla(355,62%,44%,0.25); }
-.kf-type_Khinh_công { background:hsla(220,52%,52%,0.12); color:hsl(220,60%,65%); border:1px solid hsla(220,52%,52%,0.25); }
+.kf-type.Khinh_công { background:hsla(220,52%,52%,0.12); color:hsl(220,60%,65%); border:1px solid hsla(220,52%,52%,0.25); }
 .kf-type.Nội_công { background:hsla(158,42%,36%,0.12); color:hsl(158,50%,55%); border:1px solid hsla(158,42%,36%,0.25); }
 .kf-type.Tự_sáng_tạo { background:hsla(190,50%,60%,0.12); color:hsl(190,70%,78%); border:1px solid hsla(190,50%,60%,0.25); }
 .kf-mp  { font-size:11px; color:hsl(220,60%,65%); text-align:center; }
