@@ -6,10 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thiên Thư Giang Hồ Lục·Chiến đấu</title>
 <meta name="description" content="Thiên Thư Giang Hồ Lục — ân oán giang hồ，đao kiếm vô tình。trong chốn võ lâm này，lấy võ kết bạn，lấy mạng so chiêu。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
+@font-face {
+  font-family: 'FontHienThi';
+  src: url('https://cdn.jsdelivr.net/gh/sipsapa-cdcn/thien-thu-giang-ho-luc-regex@main/Fz%20GameBr.ttf') format('truetype');
+}
 /* ════════════════════════════════════════════════
    CSS biến & đặt lại
 ════════════════════════════════════════════════ */
@@ -35,8 +36,8 @@
   --border-hover:hsla(42, 72%, 68%, 0.45);
   --glass:       hsla(24, 14%, 11%, 0.55);
   --glass-border:hsla(42, 58%, 55%, 0.12);
-  --font-display:'UVN Thang Vu', cursive;
-  --font-body:   'Noto Serif SC', serif;
+  --font-display:'FontHienThi', sans-serif;
+  --font-body:   'Fz Harukaze V2', serif;
   --ease-silk:   cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -92,7 +93,7 @@ body {
 /* ── nhãn khu vực ── */
 .zone-lbl {
   font-family: var(--font-display);
-  font-size: 14px; letter-spacing: 6px;
+  font-size: 19px; letter-spacing: 4px;
   color: var(--gold); opacity: .8;
   text-align: center; margin-bottom: 6px;
   position: relative;
@@ -382,8 +383,8 @@ body {
 #btn-row { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; align-items:center; }
 
 .ctrl-btn {
-  height:30px; padding:0 8px; border-radius:4px;
-  font-family:var(--font-body); font-size:10px; font-weight:600; letter-spacing:0.5px;
+  height:30px; padding:0 9px; border-radius:4px;
+  font-family:var(--font-body); font-size:20px; font-weight:300; letter-spacing:1.2px;
   cursor:pointer; border:1px solid var(--border); color:var(--gold-dim);
   background:hsla(24,14%,8%,0.5); transition:all .2s var(--ease-silk);
   white-space:nowrap; flex-shrink:0;
@@ -393,9 +394,9 @@ body {
 .spd-btn.active{background:hsla(200,70%,45%,0.25);border-color:hsl(200,70%,55%);color:hsl(200,80%,75%);box-shadow:0 0 8px hsla(200,70%,45%,0.3)}
 
 .act-btn {
-  flex:1; min-width:58px; max-width:82px; height:44px;
+  flex:1; min-width:58px; max-width:105px; height:44px;
   border-radius:6px;
-  font-family:var(--font-body); font-size:12px; font-weight:600; letter-spacing:1px;
+  font-family:var(--font-body); font-size:20px; font-weight:600; letter-spacing:1.8px;
   cursor:pointer;
   border:1px solid var(--border);
   color:var(--gold-dim);
@@ -430,8 +431,14 @@ body {
 .btn-def::after { background:hsla(220,52%,52%,0.1); }
 .btn-def.on { border-color:var(--azure); color:hsl(220,60%,65%); box-shadow:0 0 14px hsla(220,52%,52%,0.2); }
 
-.btn-flee { border-color:hsla(38,30%,50%,0.2); color:var(--parchment2); font-size:11px; }
+.btn-jz { border-color:hsla(158,42%,36%,0.3); color:var(--jade); }
+.btn-jz::after { background:hsla(158,42%,36%,0.1); }
+.btn-jz.on { border-color:var(--jade); color:hsl(158,50%,55%); box-shadow:0 0 14px hsla(158,42%,36%,0.2); }
 
+.btn-flee { border-color:hsla(38,30%,50%,0.2); color:var(--parchment2); font-size:px; }
+#b-kf { border-color:hsla(280,50%,55%,0.3); color:hsl(280,60%,65%); }
+#b-kf::after { background:hsla(280,50%,55%,0.1); }
+#b-kf.on { border-color:hsl(280,50%,55%); color:hsl(280,70%,75%); box-shadow:0 0 14px hsla(280,50%,55%,0.2); }
 /* ════════════════════════════════════════════════
    bảng con（Võ_công/Vật_phẩm/bảo vệ）
 ════════════════════════════════════════════════ */
@@ -501,7 +508,7 @@ body {
   border-radius: 8px;
   padding: 8px 12px;
   max-height: 170px; overflow-y:auto;
-  font-size: 13px; line-height: 1.9;
+  font-size: 20px; line-height: 1.9;
   color: hsla(38,40%,88%,0.75);
 }
 #log-zone::-webkit-scrollbar { width:4px; }
@@ -823,13 +830,13 @@ body {
 
   <!-- thanh hành động -->
   <div id="atb-wrap">
-    <div class="zone-lbl">THỨ TỰ HÀNH ĐỘNG</div>
+    <div class="zone-lbl">Thứ Tự Hành Động</div>
     <div id="atb-track"></div>
   </div>
 
   <!-- Phe địch -->
   <div id="enemy-zone">
-    <div class="zone-lbl">Phe địch</div>
+    <div class="zone-lbl">Phe Địch</div>
     <div id="enemy-cards"></div>
   </div>
 
@@ -842,7 +849,7 @@ body {
 
   <!-- Phe ta -->
   <div id="ally-zone">
-    <div class="zone-lbl">Phe ta</div>
+    <div class="zone-lbl">Phe Ta</div>
     <div id="ally-cards"></div>
   </div>
 
@@ -851,7 +858,7 @@ body {
     <button class="ctrl-btn" id="b-auto" onclick="toggleAuto()">Tự động</button>
     <button class="ctrl-btn spd-btn" id="b-spd2" onclick="toggleSpeed(2)">2x</button>
     <button class="ctrl-btn spd-btn" id="b-spd4" onclick="toggleSpeed(4)">4x</button>
-    <button class="ctrl-btn spd-btn active" id="b-sfx" onclick="toggleSfx()">Bật hiệu ứng âm</button>
+    <button class="ctrl-btn spd-btn active" id="b-sfx" onclick="toggleSfx()">Bật âm thanh</button>
   </div>
 
   <!-- vùng thao tác -->
@@ -859,22 +866,22 @@ body {
     <div class="zone-lbl" id="actor-lbl"></div>
     <div id="btn-row">
       <button class="act-btn btn-atk" id="b-atk" onclick="onAct('attack')">
-        Đánh thường
+        Đánh Thường
       </button>
       <button class="act-btn" id="b-kf" onclick="onAct('kungfu')">
-        Võ_công
+        Võ Công
       </button>
       <button class="act-btn btn-def" id="b-def" onclick="onAct('defend')">
-        Phòng thủ
+        Phòng Thủ
       </button>
-      <button class="act-btn btn-def" id="b-jz" onclick="onAct('jiazhu')">
-        Bảo vệ
+      <button class="act-btn btn-jz" id="b-jz" onclick="onAct('jiazhu')">
+        Bảo Vệ
       </button>
       <button class="act-btn" id="b-item" onclick="onAct('item')">
-        Vật_phẩm
+        Vật Phẩm
       </button>
       <button class="act-btn btn-flee" id="b-flee" onclick="onAct('flee')">
-        Chạy trốn
+        Đào Tẩu
       </button>
     </div>
     <div class="sub-panel" id="p-kf"></div>
@@ -2238,7 +2245,7 @@ function getAtkSfx(wtype,kfName){
   if(wtype==='dart')return SFX.dart;
   return SFX.fist;
 }
-function toggleSfx(){_sfxOn=!_sfxOn;const b=q('b-sfx');if(b){b.textContent=_sfxOn?'Bật hiệu ứng âm':'Tắt hiệu ứng âm';if(_sfxOn)b.classList.add('active');else b.classList.remove('active');}}
+function toggleSfx(){_sfxOn=!_sfxOn;const b=q('b-sfx');if(b){b.textContent=_sfxOn?'Bật âm thanh':'Tắt âm thanh';if(_sfxOn)b.classList.add('active');else b.classList.remove('active');}}
 
 // ── Công cụ ─────────────────────────────────────────────────
 const clamp = (v,a,b) => Math.min(Math.max(v,a),b);
@@ -2723,7 +2730,7 @@ async function init(){
   await loadKungfuLib();
   // ── Nạp võ công tự sáng tạo vào thư viện võ công ──
   _injectCustomKungfu();
-  log('══ Thiên Thư Giang Hồ Lục · Chiến đấuBật ══','l-sys');
+  log('══ Thiên Thư Giang Hồ Lục · Chiến đấu ══','l-sys');
   const mvu=await loadMvu();
   const sd=mvu?.stat_data;
   if(!sd||(!sd.Người_chơi&&!sd.Kẻ_địch)){
