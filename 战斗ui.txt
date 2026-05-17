@@ -385,7 +385,7 @@ body {
 
 .ctrl-btn {
   height:30px; padding:0 9px; border-radius:4px;
-  font-family:var(--font-body); font-size:20px; font-weight:300; letter-spacing:1.2px;
+  font-family:var(--font-body); font-size:12px; font-weight:300; letter-spacing:1.2px;
   cursor:pointer; border:1px solid var(--border); color:var(--gold-dim);
   background:hsla(24,14%,8%,0.5); transition:all .2s var(--ease-silk);
   white-space:nowrap; flex-shrink:0;
@@ -395,9 +395,9 @@ body {
 .spd-btn.active{background:hsla(200,70%,45%,0.25);border-color:hsl(200,70%,55%);color:hsl(200,80%,75%);box-shadow:0 0 8px hsla(200,70%,45%,0.3)}
 
 .act-btn {
-  flex:1; min-width:58px; max-width:105px; height:44px;
+  flex:1; min-width:58px; max-width:125px; height:48px;
   border-radius:6px;
-  font-family:var(--font-body); font-size:20px; font-weight:600; letter-spacing:1.8px;
+  font-family:var(--font-body); font-size:17px; font-weight:600; letter-spacing:1.4px;
   cursor:pointer;
   border:1px solid var(--border);
   color:var(--gold-dim);
@@ -509,7 +509,7 @@ body {
   border-radius: 8px;
   padding: 8px 12px;
   max-height: 170px; overflow-y:auto;
-  font-size: 20px; line-height: 1.9;
+  font-size: 15px; line-height: 1.9;
   color: hsla(38,40%,88%,0.75);
 }
 #log-zone::-webkit-scrollbar { width:4px; }
