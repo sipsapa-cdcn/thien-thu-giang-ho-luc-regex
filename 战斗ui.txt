@@ -4878,17 +4878,22 @@ function renderSt(key){
 
 function renderAtb(){
   const track=q('atb-track');
-  track.querySelectorAll('.atb-tok').forEach(el=>el.remove());
   for(const key of allKeys()){
-    const c=gA(key); if(!c||!c.alive)continue;
+    const c=gA(key);if(!c||!c.alive)continue;
     const p=clamp(G.atbProg[key]||0,0,97);
     const acting=G.curKey===key&&G.phase!=='atb';
-    const tok=document.createElement('div');
+    
+    let tok = document.getElementById('atb-tok-' + key);
+    if (!tok) {
+      tok = document.createElement('div');
+      tok.id = 'atb-tok-' + key;
+      const dc=`dot-${c.type}`;
+      tok.innerHTML=`<div class="atb-dot ${dc}">${c.name[0]}</div><div class="atb-lbl">${c.name}</div>`;
+      track.appendChild(tok);
+    }
+    
     tok.className=`atb-tok${acting?' acting':''}`;
     tok.style.left=acting?'97%':p+'%';
-    const dc=`dot-${c.type}`;
-    tok.innerHTML=`<div class="atb-dot ${dc}">${c.name[0]}</div><div class="atb-lbl">${c.name}</div>`;
-    track.appendChild(tok);
   }
 }
 
