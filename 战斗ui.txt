@@ -978,7 +978,11 @@ function wxCleanVisibleText(root=document.body){
 }
 document.addEventListener('DOMContentLoaded',()=>{
   wxCleanVisibleText();
-  new MutationObserver(()=>wxCleanVisibleText()).observe(document.body,{childList:true,subtree:true,characterData:true});
+  let cleanTimer;
+  new MutationObserver(()=>{
+    clearTimeout(cleanTimer);
+    cleanTimer = setTimeout(()=>wxCleanVisibleText(), 150);
+  }).observe(document.body,{childList:true,subtree:true,characterData:true});
 });
 
 const FxEngine={
