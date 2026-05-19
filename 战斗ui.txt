@@ -2297,7 +2297,14 @@ function toast(msg,ms=2400){
 function log(txt,cls=''){
   const z=q('log-zone'), d=document.createElement('div');
   d.className='log-line '+(cls||'');
-  d.textContent=txt; z.appendChild(d); z.scrollTop=z.scrollHeight;
+  d.textContent=txt; 
+  z.appendChild(d); 
+  
+  while (z.children.length > 50) {
+    z.removeChild(z.firstChild);
+  }
+  
+  z.scrollTop=z.scrollHeight;
 }
 // ── kho câu nhật ký chiến đấu văn phong văn học ──
 const FLAVOR={
