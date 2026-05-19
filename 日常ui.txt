@@ -2678,7 +2678,7 @@ async function doLotteryDraw(chatId, gameDate) {
       const newPrize = _randomJueXue(reward);
       _setLyPrize(chatId, newPrize);
     } else if (!won) {
-      _setLyProb(chatId, prob + 0.5);
+      _setLyProb(chatId, prob + 2);
     }
 
     // Hiệu ứng $Quay_thưởng: xoay 1.5 giây để tạo cảm giác chờ đợi
@@ -2723,7 +2723,7 @@ async function doLotteryDraw(chatId, gameDate) {
         if (box) box.classList.add('ly-lost');
         scrollLabel.textContent = 'Duyên pháp chưa tới';
         scrollName.textContent = 'Nhận được 300 Tiền_bạc';
-        scrollDesc.textContent = `Xác suất lần sau tăng đến ${(prob + 0.5).toFixed(1)}%`;
+        scrollDesc.textContent = `Xác suất lần sau tăng đến ${(prob + 2).toFixed(1)}%`;
         scroll.className = 'ly-scroll open';
       }
     }
