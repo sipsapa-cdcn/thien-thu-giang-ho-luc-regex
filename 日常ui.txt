@@ -102,20 +102,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 /* ── khung nội dung chính ── */
 .wx-main{position:relative;z-index:1;padding-bottom:20px}
 
-/* ── vùng chính văn ── */
-.wx-story{padding:20px 18px;border-bottom:1px solid hsla(42,68%,52%,0.08);animation:fadeInUp 0.6s var(--ease-silk) both}
-#wx-content{font-family:'FangSong_GB2312',FangSong,STFangSong,serif;font-size:21px;line-height:2.1;color:var(--text);text-align:justify;text-justify:inter-ideograph;word-break:break-word;
-  padding:20px 22px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-l);
-  backdrop-filter:blur(var(--glass-blur));min-height:60px;position:relative;overflow:hidden;
-  box-shadow:0 4px 24px hsla(0,0%,0%,0.2),inset 0 0 40px hsla(6,72%,20%,0.04),inset 0 1px 0 hsla(42,68%,52%,0.06)}
-#wx-content::before{content:'';position:absolute;top:12px;bottom:12px;left:0;width:2px;
-  background:linear-gradient(180deg,transparent,var(--vermilion),var(--gold-dim),var(--vermilion),transparent);border-radius:2px}
-#wx-content.empty{color:var(--text-dim);font-style:italic;text-align:center;font-size:13px;padding:28px}
-#wx-content p{text-indent:2em;margin-bottom:1em}
-#wx-content p:last-child{margin-bottom:0}
-#wx-content strong{color:var(--gold-l);font-weight:600;text-shadow:0 0 8px hsla(42,68%,52%,0.2)}
-#wx-content em{color:var(--text-soft);font-style:italic}
-
 /* ── vùng lựa chọn ── */
 .wx-opt-modes{display:flex;align-items:center;gap:0;margin-bottom:14px}
 .wx-opt-modes .wx-section-label{flex:1;margin-bottom:0}
@@ -966,12 +952,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 </header>
 
 <main class="wx-main">
-  <section class="wx-story" aria-label="Cốt truyện hiện tại">
-    <div class="wx-section-label"><span>Cốt truyện hiện tại</span></div>
-    <div id="wx-content" class="empty">Đang chờ câu chuyện mở ra……</div>
-  </section>
-
-  <div class="wx-divider" role="separator"><div class="wx-divider-gem"></div></div>
 
   <section class="wx-options" aria-label="Lựa chọn hành động">
     <div class="wx-opt-modes">
@@ -2779,25 +2759,6 @@ function fixExpToNext(){
 }
 
 // ══════════════════════════════════════════════
-//  Trích xuất chính văn - chỉ lấy nghiêm ngặt <content>...</content> cuối cùng
-//  (bên trong không lồng <content> khác, loại trừ văn bản nhắc chuỗi suy nghĩ)
-// ══════════════════════════════════════════════
-function extractContent(raw) {
-  if (!raw) return '';
-  // Tìm </content> cuối cùng từ sau ra trước, rồi tìm <content> gần nhất phía trước
-  const closeTag = '</content>';
-  const ci = raw.toLowerCase().lastIndexOf(closeTag);
-  if (ci < 0) return '';
-  const before = raw.slice(0, ci);
-  const oi = before.toLowerCase().lastIndexOf('<content>');
-  if (oi < 0) return '';
-  return raw.slice(oi + 9, ci)
-    .replace(new RegExp('\u003cimage\u003e[\\s\\S]*?\u003c/image\u003e','gi'), '')
-    .replace(/<!--[\s\S]*?-->/g, '')
-    .trim();
-}
-
-// ══════════════════════════════════════════════
 //  Trích xuất lựa chọn - lấy theo dòng từ <w3g>...</w3g> cuối cùng
 // ══════════════════════════════════════════════
 function extractOptions(raw) {
@@ -2810,38 +2771,6 @@ function extractOptions(raw) {
     .filter(l => /^[A-Za-z][\uff1a:]/.test(l))
     .map(l => l.replace(/\s+/g, ' ').trim())
     .filter(Boolean);
-}
-
-function formatInline(raw) {
-  if (!raw) return '';
-  const ph = [];
-  let t = raw;
-  t = t.replace(/\*\*(.+?)\*\*/g, (_, c) => { const i = ph.length; ph.push(`<strong>${c}</strong>`); return `__WX_PH_${i}__`; });
-  t = t.replace(/\*(.+?)\*/g,     (_, c) => { const i = ph.length; ph.push(`<em>${c}</em>`);         return `__WX_PH_${i}__`; });
-  ph.forEach((html, i) => { t = t.replace(new RegExp(`__WX_PH_${i}__`, 'g'), html); });
-  return t;
-}
-
-function renderMd(text) {
-  return text.split(/\n+/).map(s => s.trim()).filter(Boolean).map(p => {
-    const h4 = p.match(/^#{4}(?!#)\s+(.*)/);
-    if (h4) return `<p style="font-size:21px">${formatInline(h4[1])}</p>`;
-    const h3 = p.match(/^#{3}(?!#)\s+(.*)/);
-    if (h3) return `<p style="font-size:21px">${formatInline(h3[1])}</p>`;
-    const h2 = p.match(/^#{2}(?!#)\s+(.*)/);
-    if (h2) return `<p style="font-size:24px">${formatInline(h2[1])}</p>`;
-    const h1 = p.match(/^#{1}(?!#)\s+(.*)/);
-    if (h1) return `<p style="font-size:28px">${formatInline(h1[1])}</p>`;
-    return `<p>${formatInline(p)}</p>`;
-  }).join('');
-}
-
-function renderStory(raw) {
-  const text = extractContent(raw);
-  const el   = document.getElementById('wx-content');
-  if (!text) { el.classList.add('empty'); el.innerHTML = 'Chưa có nội dung chính văn'; return; }
-  el.classList.remove('empty');
-  el.innerHTML = renderMd(text);
 }
 
 function renderOptions(raw) {
@@ -3822,7 +3751,6 @@ function loadContent() {
       if (targetMsg) raw = targetMsg.message || '';
     }
   } catch(e) {}
-  renderStory(raw);
   renderOptions(raw);
   // Kiểm tra: có dữ liệu Kẻ_địch cập nhật nhưng không có tag chiến đấu (chỉ xem sau </content>, loại trừ nhiễu chuỗi suy nghĩ)
   const _cIdx = raw ? raw.lastIndexOf('</content>') : -1;
