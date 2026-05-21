@@ -2750,6 +2750,13 @@ async function init(){
     return;
   }
   const useData=sd;
+
+  // ---Không phát hiện kẻ địch ---
+  if (!useData.Kẻ_địch || Object.keys(useData.Kẻ_địch).length === 0) {
+    log('Không phát hiện Kẻ Địch nào! Trận chiến tự động hủy bỏ', 'l-sys');
+    document.body.innerHTML = '<div style="color: var(--parchment); text-align: center; padding: 20px; font-family: var(--font-body); font-size: 18px;">Hiện tại không có chiến đấu</div>';
+    return;
+  }
   // ── bổ sung thuộc tính kẻ địch ──
   if(useData.Kẻ_địch&&Object.keys(useData.Kẻ_địch).length){
     await fixEnemyStats(mvu);
