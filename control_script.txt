@@ -6323,7 +6323,7 @@ root.style.left = pos.x + 'px';
 root.style.top = pos.y + 'px';
 root.innerHTML = `
   <div class="orb-ring"></div>
-  <div class="orb" id="${ID}-orb"><span class="orb-text">Thiên Thư</span></div>
+  <div class="orb" id="${ID}-orb"><span class="orb-text">📜</span></div>
   <div class="menu" id="${ID}-menu">
     <div class="menu-shell">
       <div class="menu-head" id="${ID}-head">
