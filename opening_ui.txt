@@ -1264,7 +1264,7 @@ body {
   <!-- 顶部标题 -->
   <header class="header-bar" role="banner">
     <div class="title-lockup">
-      <h1 class="title-main">Thiên Thư Giang Hồ Lục</h1>
+      <h1 class="title-main" style="text-align: center; line-height: 1.4;">Thiên Thư<br>Giang Hồ Lục</h1>
       <p class="title-sub">Chronicles of the Celestial Tome</p>
     </div>
   </header>
