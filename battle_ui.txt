@@ -4335,25 +4335,6 @@ async function doKfOnTgt(atkKey,kfName,kf,tgtKey){
     }
   }
 }
-        const st={Tên:stName,Chỉ Số:s.Chỉ Số||0,Số Hiệp Còn Lại:selfBuff?(_baseRounds+1):_baseRounds};
-        if(s.Tên==='Đẩu Chuyển Tinh Di') st.Tỷ Lệ Thành Công=s.Tỷ Lệ Thành Công||0.55;
-        if(stName.startsWith('Trúng Độc')){const _yw=(G.statuses[atkKey]||[]).find(x=>x.Tên==='Dược Vương Độc Thuật');if(_yw)st.Chỉ Số=st.Chỉ Số*(1+(_yw.Chỉ Số||0.5));}
-        G.statuses[stKey]=G.statuses[stKey]||[];
-        const exist=G.statuses[stKey].find(x=>x.Tên===st.Tên);
-        const NO_STACK=['Điểm Huyệt','Choáng','Đóng Băng','Phản Đòn','Phản Kích','Phong Huyệt','Đẩu Chuyển Tinh Di'];
-        const noStack=NO_STACK.includes(st.Tên)||/^Miễn Thương/.test(st.Tên);
-        if(exist){exist.Số Hiệp Còn Lại=Math.max(exist.Số Hiệp Còn Lại,st.Số Hiệp Còn Lại);if(noStack)exist.Chỉ Số=st.Chỉ Số;else exist.Chỉ Số+=st.Chỉ Số;}
-        else G.statuses[stKey].push(st);
-        const _stBuff=['Tăng Tấn Công','Tăng Phòng Ngự','Hồi Máu','Hồi Nội','Phản Đòn','Phản Kích','Đẩu Chuyển Tinh Di','Dược Vương Độc Thuật','Sức Mạnh Tăng Lên','Thân Pháp Tăng Lên','Tăng Né Tránh','Tăng Tốc Độ','Miễn Dịch Bất Thường'].includes(st.Tên)||/^Miễn Thương/.test(st.Tên);
-        if(_stBuff) log(fL(FLAVOR.statusBuff,{tgt:stTarget.name,st:st.Tên,r:st.Số Hiệp Còn Lại}),'l-buff');
-        else log(fL(FLAVOR.statusApply,{tgt:stTarget.name,st:st.Tên,r:st.Số Hiệp Còn Lại}),'l-buff');
-        floatDmg(q(`card-${stKey}`),st.Tên,_stBuff?'hsl(42,75%,60%)':'hsl(0,70%,60%)','20px');
-        G.battleLog.push({t:'STATUS',a:atk.name,v:stTarget.name,st:st.Tên});
-        updateCard(stKey);
-      }
-    }
-  }
-}
 
 // ── Phòng Ngự ─────────────────────────────────────────────────
 function doDefend(){
