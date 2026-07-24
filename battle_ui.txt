@@ -2349,6 +2349,7 @@ async function loadMvu(){
     await new Promise(r=>setTimeout(r,500));
   }
   return null;
+}
 
 // ── Bổ sung thuộc tính Kẻ Địch (Giá trị công thức vs MVU, lấy cái nào cao hơn) ─────────────
 async function fixEnemyStats(mvuData){
