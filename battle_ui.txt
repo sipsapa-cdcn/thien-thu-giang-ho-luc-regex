@@ -2334,14 +2334,21 @@ async function loadMvu(){
     if(!Mvu){await new Promise(r=>setTimeout(r,500));continue;}
     const lastId=getLastMsgId();
     if(lastId<0){await new Promise(r=>setTimeout(r,500));continue;}
+    
+    let found = null;
     for(let i=lastId;i>=Math.max(0,lastId-10);i--){
-      try{ const v=await Mvu.getMvuData({type:'message',message_id:i});
-        if(v?.stat_data){G.aiMsgId=i;return v;} }catch(e){}
+      try{ 
+        const v=await Mvu.getMvuData({type:'message',message_id:i});
+        if(v?.stat_data){G.aiMsgId=i; found = v; break;} 
+      }catch(e){}
     }
-    return null;
+    
+    if(found) return found; // Nếu tìm thấy thì trả về ngay
+    
+    // Nếu chưa tìm thấy, chờ 500ms rồi thử lại vòng lặp mới
+    await new Promise(r=>setTimeout(r,500));
   }
   return null;
-}
 
 // ── Bổ sung thuộc tính Kẻ Địch (Giá trị công thức vs MVU, lấy cái nào cao hơn) ─────────────
 async function fixEnemyStats(mvuData){
